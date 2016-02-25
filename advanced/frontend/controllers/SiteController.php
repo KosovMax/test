@@ -110,7 +110,15 @@ class SiteController extends Controller
                     }else{
                         $today=date("d.m.Y H:i:s"); 
                     }
-                    Yii::$app->db->createCommand()->insert('citymaps', ['address'=>$m[0], 'coorYX'=>$coor , 'color'=>$m[1], 'date'=>$today])->execute();
+
+                    if ((Citymaps::findOne(['address'=>$m[0]])) === null) {
+                        // $model->address=$m[0];
+                        // $model->coorYX=$coor;
+                        // $model->color=$m[1];
+                        // $model->date=$today;
+                        // $model->save();
+                        Yii::$app->db->createCommand()->insert('citymaps', ['address'=>$m[0], 'coorYX'=>$coor , 'color'=>$m[1], 'date'=>$today])->execute();
+                    }
                 }
             }
         }
